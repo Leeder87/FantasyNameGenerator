@@ -1,0 +1,30 @@
+﻿@model IEnumerable<FantasyNameGen.Models.Name>
+@{
+    ViewBag.Title = "Все имена";
+}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+<script type="text/javascript" on-content-loaded="true">
+$(document).ready(function () {
+    $(".ChangeCommonBtn").click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: $(this).attr("href"),
+            success: function () {
+                
+            }
+        }); return false;
+    })
+});
+</script>
+
+<a asp-action="Create">Добавить имя</a>
+<table class="table">
+    <tr><td>Common?</td><td>Имя</td><td>Транскрипция</td><td>Пол</td><td>Варианты</td><td>Описание</td></tr>
+    @foreach (var item in Model)
+    {
+        <tr><td>@Html.ActionLink(@item.Common.ToString(), "ChangeCommon", "Names", new { id = item.Id }, new { @class = "ChangeCommonBtn" })</td><td>@item.RomanName</td><td>@item.CyrilName</td><td>@item.Gender</td><td>@item.Variants</td><td>@item.Description</td></tr>
+    }
+</table>
+
+

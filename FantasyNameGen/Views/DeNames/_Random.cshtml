@@ -1,0 +1,28 @@
+﻿@model DeNameDeSurnameViewModel
+@{
+    ViewBag.Title = "RANDOM NAME";
+}
+
+<h1>@Model.DeName.RomanName @Model.DeSurname.RomanSurname</h1>
+<p>Транскрипция: <strong>@Model.DeName.CyrilName @Model.DeSurname.CyrilSurname</strong></p>
+
+@switch (@Model.DeName.Gender)
+{
+    case 'м':
+        <p>Пол: мужской</p>
+        break;
+
+    case 'ж':
+        <p>Пол: женский</p>
+        break;
+
+    case 'у':
+        <p>Пол: универсальный</p>
+        break;
+}
+@if (!String.IsNullOrEmpty(@Model.DeName.Variants))
+{
+    <p>Варианты: @Model.DeName.Variants</p>
+}
+<p>@Model.DeName.Description</p>
+

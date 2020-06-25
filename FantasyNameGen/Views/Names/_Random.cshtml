@@ -1,0 +1,28 @@
+﻿@model NameSurnameViewModel
+@{
+    ViewBag.Title = "RANDOM NAME";
+}
+
+<h1>@Model.Name.RomanName @Model.Surname.RomanSurname</h1>
+<p>Транскрипция: <strong>@Model.Name.CyrilName @Model.Surname.CyrilSurname</strong></p>
+
+@switch (@Model.Name.Gender)
+{
+    case 'м':
+        <p>Пол: мужской</p>
+        break;
+
+    case 'ж':
+        <p>Пол: женский</p>
+        break;
+
+    case 'у':
+        <p>Пол: универсальный</p>
+        break;
+}
+@if (!String.IsNullOrEmpty(@Model.Name.Variants))
+{
+    <p>Варианты: @Model.Name.Variants</p>
+}
+<p>@Model.Name.Description</p>
+

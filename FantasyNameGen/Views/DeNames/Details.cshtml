@@ -1,0 +1,23 @@
+﻿@model FantasyNameGen.Models.DeName
+@{
+    ViewBag.Title = "DE-NAME";
+}
+<h1>@Model.RomanName</h1>
+<p>Транскрипция: <strong>@Model.CyrilName</strong></p>
+
+@switch (@Model.Gender)
+{
+    case 'м':
+        <p>Пол: мужской</p>
+        break;
+
+    case 'ж':
+        <p>Пол: женский</p>
+        break;
+
+    case 'у':
+        <p>Пол: универсальный</p>
+        break;
+}
+<p>Варианты: @Model.Variants</p>
+<p>@Model.Description</p>

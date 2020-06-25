@@ -1,0 +1,72 @@
+﻿@model IEnumerable<FantasyNameGen.Models.Name>
+@{
+    ViewBag.Title = "Генерируем английское имя!";
+}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+
+<h1>Выберите параметры английского имени:</h1>
+
+@using (Html.BeginForm("Random", "Names", FormMethod.Post))
+{
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6 col-md-4 col-lg3">
+            <label for="Gender">Выберите пол:</label>
+            <br />
+            @Html.RadioButton("Gender", "м")
+            <span>Мужской</span> <br />
+            @Html.RadioButton("Gender", "ж")
+            <span>Женский</span> <br />
+            @Html.RadioButton("Gender", "а", true)
+            <span>Любой</span>
+        </div>
+        <div class="col-xs-6 col-md-4 col-lg3">
+            <label for="Common">Выберите пол:</label>
+            <br />
+            @Html.RadioButton("Common", "1")
+            <span>Только распространённые</span> <br />
+            @Html.RadioButton("Common", "2")
+            <span>Все с учётом распространённости</span> <br />
+            @Html.RadioButton("Common", "3", true)
+            <span>Все с равными шансами</span>
+        </div>
+    </div>   
+    <div class="row">
+        <div class="col-xs-6 col-xs-offset-2">
+            @Html.CheckBox("needSurname", false)
+            <label for="needSurname">также сгенерить фамилию</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-xs-offset-2">
+            <input type="submit" value="Получить имя" id="RandomSubmit" />
+        </div>
+    </div>
+</div>
+
+}
+
+<div id="randomDetails">
+</div>
+<script type="text/javascript" on-content-loaded="true">
+$(document).ready(function () {
+    $("#RandomSubmit").click(function (e) {
+        e.preventDefault();
+        $("#RandomSubmit").prop('disabled', true);
+        $.ajax({
+            url: "Names/Random",
+            type: 'POST',
+            data: {
+                "gender": $('input[name=Gender]:checked').val(),
+                "common": $('input[name=Common]:checked').val(),
+                "needSurname": $('input#needSurname').prop('checked')
+            },
+            success: function (response) {
+                $("#randomDetails").html(response);
+                $("#RandomSubmit").prop('disabled', false);
+            }
+        });
+    })
+});
+</script>

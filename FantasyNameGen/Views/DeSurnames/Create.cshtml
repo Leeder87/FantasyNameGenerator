@@ -1,0 +1,17 @@
+﻿@model FantasyNameGen.Models.DeSurname
+@{
+    ViewBag.Title = "Добавление немецкой фамилии";
+}
+<form asp-action="create" asp-controller="DeSurnames">
+    <div class="form-group">
+        <label asp-for="RomanSurname" class="control-label">Фамилия</label>
+        <input type="text" asp-for="RomanSurname" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="CyrilSurname" class="control-label">Транскрипция</label>
+        <input type="text" asp-for="CyrilSurname" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Send" class="btn btn-default" />
+    </div>
+</form>
